@@ -1,6 +1,4 @@
-import json
-import re
-import scrapy
+import scrapy, json, re
 
 
 class AutoriaSpider(scrapy.Spider):
@@ -8,7 +6,6 @@ class AutoriaSpider(scrapy.Spider):
     start_urls = ['https://auto.ria.com/uk/legkovie/tesla/?page=' + str(p) for p in range(1, 99)]
 
     def parse(self, response, **kwargs):
-
 
         if response.status == 200:
             for carData in response.css("div.content"):
@@ -22,4 +19,3 @@ class AutoriaSpider(scrapy.Spider):
                 }
                 with open("savedCarsData1.json", 'a', encoding="utf-8") as f1:
                     json.dump(data, f1, ensure_ascii=False, indent=4)
-
